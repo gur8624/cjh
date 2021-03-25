@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -35,7 +38,7 @@ public class USController {
         log.info("아이디!!!!" + userDto.getEmail());
         log.info("비밀번호!!!!" + userDto.getPassword());
         service.insertUser(userDto);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping(value = "/login")
@@ -44,11 +47,16 @@ public class USController {
     }
 
     @PostMapping(value = "/login")
-    public String signIn(String email, String password) {
+    public String signIn(String email, String password, HttpServletRequest request, Model model) {
+        userDto userDto = service.loginUser(email, password);
+
+        HttpSession session = (HttpSession) request.getSession();
         log.info("아아아아이디" + email);
         log.info("비미미미밀번호" + password);
-        service.loginUser(email, password);
-        return "redirect:/";
+
+        session.setAttribute("LoginUser", userDto.getEmail());
+        session.setAttribute("LoginPass", userDto.getPassword());
+        return "redirect:/users";
     }
 
 //    @GetMapping(value = "/users")
