@@ -12,8 +12,7 @@ public interface loginmapper {
 
     userDto loginUser(String email, String password);
 
-
-//    userDto findByUser(String email);
+    void updateUser(userDto userDto);
 
 
 }

@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Log4j2
 public class ExService {
-	@Autowired(required = false)
 	loginmapper loginmapper;
+
+	@Autowired
+	public ExService(loginmapper loginmapper) {
+		this.loginmapper = loginmapper;
+	}
 
 	public userDto insertUser(userDto userDto) {
 		log.info("인서트유저확인" + userDto.getEmail());
@@ -22,17 +26,22 @@ public class ExService {
 		return userDto;
 	}
 
-	public userDto loginUser(String email, String password ) {
-		log.info("아이디" + email,password);
+	public userDto loginUser(String email, String password) {
+		log.info("아이디" + email);
+		log.info("비밀번호" + password);
 		userDto Dto = loginmapper.loginUser(email, password);
 		return Dto;
 	}
 
+	public userDto updateUser(userDto userDto) {
+		loginmapper.updateUser(userDto);
+		log.info("아이디" + userDto.getEmail());
+		log.info("비밀번호" + userDto.getPassword());
+		return userDto;
+	}
 
-//	public userDto findByUser(String email) {
-//
-//		return loginmapper.findByUser(email);
-//	}
+
+
 
 
 }

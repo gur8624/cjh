@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<a th:href="@{/}">홈으로 돌아가기</a>
+<a th:href="@{/update}">회원정보 수정하기</a>
 <div class="container">
     <div>
         <table>
             <thead>
             <tr>
                 <th>#</th>
-                <th>이름</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="member : ${users}">
-                <td th:text="${users.email}"></td>
-                <td th:text="${users.password}"></td>
+            <tr>
+                <td th:text="${session.LoginUser}"></td>
+                <td th:text="${session.LoginPass}"></td>
             </tr>
             </tbody>
         </table>

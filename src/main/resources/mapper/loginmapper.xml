@@ -7,11 +7,12 @@
         insert into user_tb10(email, password) values(#{email}, #{password})
     </insert>
 
-    <select id="loginUser" resultType="com.example.cjh.dto">
+    <select id="loginUser" resultType="com.example.cjh.dto.userDto">
         select * from user_tb10 where email= #{email} and password= #{password}
     </select>
 
-<!--    <select id="findByUser" resultType="com.example.cjh.dto">-->
-<!--        select * from user_tb10 where email= #{email}-->
-<!--    </select>-->
+    <update id="updateUser" >
+        update user_tb10 set email= #{email}, password= #{password} where email= #{email} and password= #{password}
+    </update>
+
 </mapper>
