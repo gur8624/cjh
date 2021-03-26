@@ -10,7 +10,7 @@ public interface loginmapper {
 
     void insertUser(userDto userDto);
 
-    userDto loginUser(String email, String password);
+    userDto loginUser(userDto userDto);
 
     void updateUser(userDto userDto);
 

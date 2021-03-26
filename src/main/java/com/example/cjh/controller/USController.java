@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,16 +49,16 @@ public class USController {
     }
 
     @PostMapping(value = "/login")
-    public String signIn(String email, String password, HttpServletRequest request, Model model) {
+    public String signIn(userDto userDto, HttpServletRequest request, RedirectAttributes attributes, Model model) {
         log.info("controller");
-        service.loginUser(email, password);
+        HttpSession session = request.getSession();
         log.info("서비스 통과");
-        HttpSession session = (HttpSession) request.getSession();
-        log.info("아아아아이디" + email);
-        log.info("비미미미밀번호" + password);
-
-        session.setAttribute("LoginUser", email);
-        session.setAttribute("LoginPass", password);
+        userDto user2 = service.loginUser(userDto);
+        log.info("아아아아이디" + user2);
+        if(user2 != null) {
+            session.setAttribute("LoginUser", user2);
+            model.addAttribute("id", user2.getCode());
+        }
         return "redirect:/";
     }
 
@@ -76,12 +77,11 @@ public class USController {
     }
 
     @PostMapping(value = "/update")
-    public String updateUser(userDto userDto, HttpServletRequest request) {
-        HttpSession session = (HttpSession) request.getSession();
+    public String updateUser(userDto userDto,String email, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         service.updateUser(userDto);
         session.invalidate();
-        log.info("이메일넘어가냐?" + userDto.getEmail());
-        log.info("비밀번호도 넘어가냐...." + userDto.getPassword());
+        log.info("데이터넘어가냐...?" + userDto);
         return "redirect:";
     }
 

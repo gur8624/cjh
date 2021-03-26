@@ -26,18 +26,19 @@ public class ExService {
 		return userDto;
 	}
 
-	public userDto loginUser(String email, String password) {
-		log.info("아이디" + email);
-		log.info("비밀번호" + password);
-		userDto Dto = loginmapper.loginUser(email, password);
-		return Dto;
+	public userDto loginUser(userDto userDto) {
+		log.info("아이디" + userDto);
+
+		return loginmapper.loginUser(userDto);
 	}
 
-	public userDto updateUser(userDto userDto) {
-		loginmapper.updateUser(userDto);
-		log.info("아이디" + userDto.getEmail());
-		log.info("비밀번호" + userDto.getPassword());
-		return userDto;
+	public void updateUser(userDto dto) {
+		loginmapper.loginUser(dto);
+		log.info("dto찍히냐??" + dto);
+		loginmapper.updateUser(dto);
+		log.info("userdto찍히냐?" + dto);
+		log.info("아이디" + dto.getEmail());
+		log.info("비밀번호" + dto.getPassword());
 	}
 
 
