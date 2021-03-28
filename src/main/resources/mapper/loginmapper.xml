@@ -15,4 +15,8 @@
         update user_tb10 set email= #{email}, password= #{password}, name= #{name} where code =#{code}
     </update>
 
+    <select id="findUser" resultType="com.example.cjh.dto.userDto">
+        select * from user_tb10 where name= #{name}
+    </select>
+
 </mapper>

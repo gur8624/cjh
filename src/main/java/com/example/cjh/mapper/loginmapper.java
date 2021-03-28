@@ -14,5 +14,7 @@ public interface loginmapper {
 
     void updateUser(userDto userDto);
 
+    userDto findUser(userDto userDto);
+
 
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이메일찾기</title>
+</head>
+<body>
+<form th:action="@{/find}" th:method="post">
+    <input type="text" name="name" placeholder="이름을 입력해주세요">
+    <button type="submit">이메일 찾기</button>
+
+    <a th:text="${findE}"></a>
+    <a th:text="${findP}"></a>
+</form>
+</body>
+</html>

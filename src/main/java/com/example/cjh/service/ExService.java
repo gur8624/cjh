@@ -42,6 +42,12 @@ public class ExService {
 	}
 
 
+	public userDto findUser(userDto userDto) {
+
+		log.info("아이디찾기~~~" + userDto);
+		return loginmapper.findUser(userDto);
+
+	}
 
 
 

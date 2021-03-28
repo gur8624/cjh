@@ -90,6 +90,19 @@ public class USController {
         return "/update";
     }
 
+    @PostMapping(value = "/find")
+    public String findUser(userDto userDto, Model model) {
+        userDto Dto = service.findUser(userDto);
+        model.addAttribute("findE", Dto.getEmail());
+        model.addAttribute("findP", Dto.getPassword());
+        log.info("이거맞냐??" + Dto);
+        return "/find";
+    }
+
+    @GetMapping(value = "/find")
+    public void findPage() {
+
+    }
 
 
 
